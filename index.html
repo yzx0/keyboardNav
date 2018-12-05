@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="./style.css">
     <title>导航</title>
 </head>
+
 <body>
     <header></header>
     <main>
@@ -17,10 +19,10 @@
     <footer></footer>
     <script>
         key = {
-            0:{0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:'10'},
-            1:{0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:'9'},
-            2:{0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:'7'},
-            length:'3'
+            0: { 0: 'q', 1: 'w', 2: 'e', 3: 'r', 4: 't', 5: 'y', 6: 'u', 7: 'i', 8: 'o', 9: 'p', length: '10' },
+            1: { 0: 'a', 1: 's', 2: 'd', 3: 'f', 4: 'g', 5: 'h', 6: 'j', 7: 'k', 8: 'l', length: '9' },
+            2: { 0: 'z', 1: 'x', 2: 'c', 3: 'v', 4: 'b', 5: 'n', 6: 'm', length: '7' },
+            length: '3'
         }
         hash = {
             'q': 'qq.com',
@@ -34,42 +36,67 @@
             'o': 'opera.com',
             'p': 'undefined',
             'a': 'acfun.com',
-            'z': 'zhihu,com',
-            'm': 'www.mcdonalds.com'   
+            'z': 'zhihu.com',
+            'm': 'www.mcdonalds.com'
         }
         hashLocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
-        if (localStorage){
+        if (localStorage) {
             hash = hashLocalStorage
         }
+
         index = 0
-        while(index < key['length']){
+        while (index < key['length']) {
             div1 = document.createElement('div')
             vessel.appendChild(div1)
             index2 = 0
             secondArr = key[index]
-            while (index2 < secondArr['length']){
+            while (index2 < secondArr['length']) {
+                
                 myKeyboard = document.createElement('kbd')
-                myKeyboard.textContent = secondArr[index2]
                 div1.appendChild(myKeyboard)
+
+                span = document.createElement('span')
+                span.textContent = secondArr[index2]
+                myKeyboard.appendChild(span)
+
                 editButton = document.createElement('button')
                 editButton.textContent = '编辑'
                 editButton.id = secondArr[index2]
                 myKeyboard.appendChild(editButton)
-                editButton.onclick = function(buttonInfo){
-                   buttonKey = buttonInfo.target.id
-                   newWebSite = prompt('请输入新的地址')
-                   hash[buttonKey] = newWebSite
-                   localStorage.setItem('zzz',JSON.stringify(hash))
+
+                myImg = document.createElement('img')
+                if(hash[secondArr[index2]]){
+                    myImg.src = 'http://' + hash[secondArr[index2]] + '/favicon.ico'
                 }
+                else{
+                    myImg.src = './img/none.jpg'
+                }
+                myImg.onerror = function(imgInfo){
+                    imgInfo.target.src = './img/none.jpg'
+                    console.log('error')
+                }
+                myKeyboard.appendChild(myImg)
+
+                editButton.onclick = function (buttonInfo) {
+                    button = buttonInfo.target
+                    buttonId = buttonInfo.target.id
+                    newWebSite = prompt('请输入新的地址')
+                    hash[buttonId] = newWebSite
+                    img2 = button.nextSibling
+                    img2.src = 'http://' + newWebSite + '/favicon.ico'
+                    localStorage.setItem('zzz', JSON.stringify(hash))
+                }
+                
                 index2++
-            }    
+            }
             index++
         }
-        document.onkeypress = function(buttonInfo){
+        document.onkeypress = function (buttonInfo) {
             website = hash[buttonInfo.key]
-            window.open('http://' + website ,'_blank')
-            console.log(buttonInfo.target)
+            window.open('http://' + website, '_blank')
+    
         }   
     </script>
 </body>
+
 </html>

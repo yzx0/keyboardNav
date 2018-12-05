@@ -1,18 +1,36 @@
 *{margin: 0;padding: 0;}
+body{
+    background:url('./img/wallpaper.jpg') no-repeat center center;
+    background-size: cover;
+}
 .vessel  kbd{
     border:1px solid pink;
-    width: 4em;height: 4em;
+    width: 70px;height: 70px;
     display: inline-block;
     text-transform: uppercase;
     position: relative;
+    border-radius: 50%;
+    margin: 11px 11px;
+}
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 .vessel{
     text-align: center;
 }
-
 .vessel kbd > button{
     position: absolute;
     right: 0;
     bottom: 0;
 }
 
+.vessel kbd > img{
+    width: 16px;
+    height: 16px;
+}
+.vessel kbd > .keyboardWord{
+    
+}
