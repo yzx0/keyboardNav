@@ -20,6 +20,9 @@ main{
 }
 .vessel{
     text-align: center;
+    background: rgba(0,0,0,0.2);
+    border-radius: 6px;
+    padding: 16px;
 }
 .vessel kbd > button{
     position: absolute;
