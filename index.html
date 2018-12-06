@@ -40,41 +40,44 @@
             'z': 'zhihu.com',
             'm': 'www.mcdonalds.com'
         }
-        hashLocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
+        hashLocalStorage = getFromLocalStorage('zzz')
         if (localStorage) {
             hash = hashLocalStorage
         }
-
+        
+        function getFromLocalStorage(name){
+            return JSON.parse(localStorage.getItem(name) || 'null')
+        }
         //生成键盘
         index = 0
         while (index < key['length']) {
-            div1 = document.createElement('div')
+            div1 = createTag('div',{className:'row',id:'row'})
             vessel.appendChild(div1)
             index2 = 0
             secondArr = key[index]
             while (index2 < secondArr['length']) {
                 
-                myKeyboard = document.createElement('kbd')
+                myKeyboard = createTag('kbd')
                 div1.appendChild(myKeyboard)
 
-                span = document.createElement('span')
-                span.textContent = secondArr[index2]
+                span = document.createElement('span',{textContent:'secondArr[index2]'})
+                
                 myKeyboard.appendChild(span)
 
                 editButton = document.createElement('button')
-                editButton.textContent = '编辑'
+                editButton.textContent = 'E'
                 editButton.id = secondArr[index2]
                 myKeyboard.appendChild(editButton)
 
-                myImg = document.createElement('img')
+                myImg = createTag('img')
                 if(hash[secondArr[index2]]){
                     myImg.src = 'http://' + hash[secondArr[index2]] + '/favicon.ico'
                 }
                 else{
-                    myImg.src = './img/none.jpg'
+                    myImg.src = './img/none.png'
                 }
                 myImg.onerror = function(imgInfo){
-                    imgInfo.target.src = './img/none.jpg'
+                    imgInfo.target.src = './img/none.png'
                     console.log('error')
                 }
                 myKeyboard.appendChild(myImg)
@@ -99,6 +102,15 @@
             window.open('http://' + website, '_blank')
     
         }   
+
+        //创建标签
+        function createTag(tagName,attributes){
+            var element = document.createElement(tagName)
+            for(var key in attributes){    //key是名为attributes的哈希的key。className ：xxx
+                element[key] = attributes[key]
+            }
+            return element
+        }
     </script>
 </body>
 
