@@ -17,12 +17,12 @@
         </div>
     </main>
     <footer></footer>
-    <script>
+    <script type="text/javascript">
         //初始化数据
         var data = init()
         var key = data['key']
         var hash = data['hash']
-
+console.log(data)
         //生成键盘
         createKeyboard(key, hash)
 
@@ -55,7 +55,7 @@
                 'm': 'www.mcdonalds.com'
             }
             var hashLocalStorage = getFromLocalStorage('zzz')
-            if (localStorage) {
+            if (hashLocalStorage) {
                 hash = hashLocalStorage
             }
             return {
@@ -78,6 +78,7 @@
                     //创建<kbd>
                     var myKeyboard = createTag('kbd')
                     appendTag(div1, myKeyboard)
+                    console.log(hash[secondArr[index2]])
 
                     //创建<span>
                     var span = createTag('span', { textContent: secondArr[index2] })
@@ -86,9 +87,10 @@
                     //创建<button>
                     var editButton = createTag('button', { textContent: 'E', id: secondArr[index2] })
                     appendTag(myKeyboard, editButton)
-
+                    
                     //创建<img>    
                     var icon = createIcon(hash[secondArr[index2]])
+                    console.log(hash[secondArr[index2]])
                     appendTag(myKeyboard, icon)
 
                     //实现点击编辑功能
@@ -134,11 +136,11 @@
         //监听编辑按钮，实现点击编辑功能
         function clickEdit(editButton) {
             editButton.onclick = function (buttonInfo) {
-                button = buttonInfo.target
-                buttonId = buttonInfo.target.id
-                newWebSite = prompt('请输入新的地址')
+                var button = buttonInfo.target
+                var buttonId = buttonInfo.target.id
+                var newWebSite = prompt('请输入新的地址')
                 hash[buttonId] = newWebSite
-                img2 = button.nextSibling
+                var img2 = button.nextSibling
                 img2.src = 'http://' + newWebSite + '/favicon.ico'
                 localStorage.setItem('zzz', JSON.stringify(hash))
             }
