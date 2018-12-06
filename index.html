@@ -22,7 +22,7 @@
         var data = init()
         var key = data['key']
         var hash = data['hash']
-console.log(data)
+
         //生成键盘
         createKeyboard(key, hash)
 
@@ -78,7 +78,6 @@ console.log(data)
                     //创建<kbd>
                     var myKeyboard = createTag('kbd')
                     appendTag(div1, myKeyboard)
-                    console.log(hash[secondArr[index2]])
 
                     //创建<span>
                     var span = createTag('span', { textContent: secondArr[index2] })
@@ -90,7 +89,6 @@ console.log(data)
                     
                     //创建<img>    
                     var icon = createIcon(hash[secondArr[index2]])
-                    console.log(hash[secondArr[index2]])
                     appendTag(myKeyboard, icon)
 
                     //实现点击编辑功能
