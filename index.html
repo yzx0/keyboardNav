@@ -25,17 +25,11 @@
 
         //生成键盘
         createKeyboard(key, hash)
-        console.log(key)
-        console.log(hash)
 
         //监听用户键盘输入
-        document.onkeypress = function (buttonInfo) {
-            website = hash[buttonInfo.key]
-            window.open('http://' + website, '_blank')
-        }
+        listenToUser(hash)
 
-
-        //下面是工具函数
+/************************************************/
 
         //初始化数据
         function init() {
@@ -98,7 +92,7 @@
                     appendTag(myKeyboard, myImg)
 
                     //处理img无法正常显示
-                    imgProblemHandling(hash[secondArr[index2]],myImg)
+                    imgProblemHandling(hash[secondArr[index2]], myImg)
 
                     //实现点击编辑功能
                     clickEdit(editButton);
@@ -114,7 +108,7 @@
             }
             return element
         }
-        
+
         //添加标签到父元素
         function appendTag(father, child) {
             return father.appendChild(child)
@@ -126,7 +120,7 @@
         }
 
         //处理如果对应域名不存在，图片无法显示问题
-        function imgProblemHandling(domain,myImg) { //domain接收一个该域名对应的hash
+        function imgProblemHandling(domain, myImg) { //domain接收一个该域名对应的hash
             if (domain) {
                 myImg.src = 'http://' + domain + '/favicon.ico'
             }
@@ -150,6 +144,15 @@
                 localStorage.setItem('zzz', JSON.stringify(hash))
             }
         }
+
+        //监听用户键盘输入
+        function listenToUser(domain) {
+            document.onkeypress = function (buttonInfo) {
+                domain = hash[buttonInfo.key]
+                window.open('http://' + domain, '_blank')
+            }
+        }
+
     </script>
 </body>
 
