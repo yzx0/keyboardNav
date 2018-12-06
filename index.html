@@ -88,11 +88,8 @@
                     appendTag(myKeyboard, editButton)
 
                     //创建<img>    
-                    var myImg = createTag('img')
-                    appendTag(myKeyboard, myImg)
-
-                    //处理img无法正常显示
-                    imgProblemHandling(hash[secondArr[index2]], myImg)
+                    var icon = createIcon(hash[secondArr[index2]])
+                    appendTag(myKeyboard, icon)
 
                     //实现点击编辑功能
                     clickEdit(editButton);
@@ -120,16 +117,18 @@
         }
 
         //处理如果对应域名不存在，图片无法显示问题
-        function imgProblemHandling(domain, myImg) { //domain接收一个该域名对应的hash
+        function createIcon(domain) { //domain接收一个该域名对应的值
+            var icon = createTag('img')
             if (domain) {
-                myImg.src = 'http://' + domain + '/favicon.ico'
+                icon.src = 'http://' + domain + '/favicon.ico'
             }
             else {
-                myImg.src = './img/none.png'
+                icon.src = './img/none.png'
             }
-            myImg.onerror = function (imgInfo) {
+            icon.onerror = function (imgInfo) {
                 imgInfo.target.src = './img/none.png'
             }
+            return icon
         }
 
         //监听编辑按钮，实现点击编辑功能
